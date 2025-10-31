@@ -32,7 +32,7 @@ export const Form = ({ fields, FooterComponent, initialValues }: FormProps) => {
 
   useEffect(() => {
     setData(initFormState(fields, initialValues));
-  }, [fields]);
+  }, [fields, initialValues]);
 
   if (!fields) {
     return null;
@@ -82,7 +82,6 @@ export const Form = ({ fields, FooterComponent, initialValues }: FormProps) => {
                     id={htmlFor + optionIndex}
                     name={index.toString()}
                     checked={formData[index] === value}
-                    value={formData[index]}
                     onChange={() => setData(prev => ({ ...prev, [index]: value }))}
                   />
                   <label className="inline-label" htmlFor={htmlFor + optionIndex}>
@@ -94,6 +93,8 @@ export const Form = ({ fields, FooterComponent, initialValues }: FormProps) => {
             </div>
           );
         }
+
+        return null;
       })}
 
       {FooterComponent(formData)}

@@ -1,11 +1,13 @@
 import { FINISH_SCREEN_PATH, STEPS } from "../../const";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { StepComponent } from "./step";
 import { MainScreen } from "./main-screen";
 import { FormDataType } from "../form/form";
 import { useEffect } from "react";
 import { StepDataType } from "../../types";
 import { FinishScreen } from "./finish-screen";
+import { useContext } from "react";
+import { FormDataContext } from "../../context/form-data-context/form-data-context";
 
 interface ContentProps {
   stepsData: StepDataType[] | null;
@@ -19,9 +21,12 @@ interface ContentProps {
  */
 
 export const Content = ({ stepsData }: ContentProps) => {
+  const { saveFormData, getFormData, isIntroFormFilled } = useContext(FormDataContext);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const onSave = (index: number, stepData: StepDataType, formData: FormDataType) => {
     /*раскомментировать этот код поможет использование контекста FormDataContext*/
-    //saveFormData(stepData.formName, formData);
+    saveFormData(stepData.formName, formData);
 
     let path = FINISH_SCREEN_PATH;
 
@@ -30,17 +35,14 @@ export const Content = ({ stepsData }: ContentProps) => {
     }
 
     //TODO: с помощью навигации из React Router перейти на "path", в этой переменной уже лежит нужная часть URL
-  }
-
-  const checkIntroForm = () => {
-    /*if (!isIntroFormFilled() && pathname !== "/") {
-      //TODO: с помощью навигации из React Router перейти на "/" (начальный экран)
-    }*/
+    navigate(path);
   }
 
   useEffect(() => {
-    checkIntroForm();
-  }, []);
+    if (!isIntroFormFilled() && pathname !== "/") {
+      navigate("/");
+    }
+  }, [pathname, isIntroFormFilled, navigate]);
 
   if (!stepsData) {
     return null;
@@ -64,7 +66,7 @@ export const Content = ({ stepsData }: ContentProps) => {
               <StepComponent
                 step={step}
                 /*раскомментировать этот код поможет использование контекста FormDataContext*/
-                // initialValues={getFormData(stepData.formName)}
+                initialValues={getFormData(stepData.formName)}
                 formFields={stepData.fields}
                 onSave={(formData) => onSave(index, stepData, formData)}
               />

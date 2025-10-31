@@ -50,12 +50,13 @@ button {
   padding: 10px 20px;
   text-transform: uppercase;
   height: 40px;
-  border-radius: 5px;
-  box-shadow: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.08);
   outline: none;
   border-width: 1px;
+  border-color: transparent;
   opacity: 1;
-  transition: opacity 0.2s;
+  transition: transform 0.06s ease, opacity 0.2s ease;
 }
 
 button:disabled:hover {
@@ -63,12 +64,11 @@ button:disabled:hover {
 }
 
 button:enabled {
-  background-color: #11b96c;
-  color: white;
-  border: none;
+  background-color: #E86E25; /* теплый ретро-оранжевый */
+  color: #fff;
+  border: 1px solid #d5601a;
   cursor: pointer;
 }
 
-button:hover {
-  opacity: 0.6;
-}
+button:hover { opacity: 0.9; }
+button:active { transform: translateY(1px); box-shadow: 0 2px 0 rgba(0,0,0,0.08); }

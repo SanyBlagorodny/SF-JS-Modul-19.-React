@@ -8,7 +8,12 @@ import { FormContextType, FormDataContextResult, FormDataContextType, FormName }
  * TypeScript подскажет, чего в этом объекте не хватает
  * нужно заполнить объект, с которым вызывается createContext, соответствующими полями
  */
-export const FormDataContext = createContext<FormContextType>({});
+export const FormDataContext = createContext<FormContextType>({
+  saveFormData: () => undefined,
+  getFormData: () => undefined,
+  getAllForms: () => [],
+  isIntroFormFilled: () => false,
+});
 
 export const FormDataContextWrapper = ({ children }: PropsWithChildren) => {
   const [forms, setFormsData] = useState<FormDataContextType>({});
@@ -18,8 +23,7 @@ export const FormDataContextWrapper = ({ children }: PropsWithChildren) => {
   }
 
   const getFormData = (name: FormName): FormDataType | undefined => {
-    //TODO: реализовать логику поиска нужной формы
-    return undefined;
+    return forms[name];
   };
 
   const getAllForms = (): FormDataContextResult => {
@@ -27,8 +31,9 @@ export const FormDataContextWrapper = ({ children }: PropsWithChildren) => {
   }
 
   const isIntroFormFilled = (): boolean => {
-    //TODO: реализовать логику проверки: заполнено ли хотя бы одно поле в форме FormName.Introduction
-    return false;
+    const intro = forms[FormName.Introduction];
+    if (!intro) return false;
+    return Object.values(intro).some(v => Boolean(v));
   }
 
   return (

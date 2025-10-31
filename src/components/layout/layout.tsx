@@ -7,6 +7,7 @@ export interface LayoutProps {
   HeaderComponent: ReactNode;
   NavComponent: ReactNode;
   ContentComponent: ReactNode;
+  FooterComponent?: ReactNode;
 }
 
 //TODO
@@ -14,18 +15,20 @@ export interface LayoutProps {
  * извлеките все недостающие пропсы и расставьте их по нужным местам,
  * чтобы компонент Layout заработал корректно
  */
-export const Layout = (props: LayoutProps) => {
+export const Layout = ({ showLoader, HeaderComponent, NavComponent, ContentComponent, FooterComponent }: LayoutProps) => {
   return (
     <div className="layout">
-      <div className="header" />
+      <div className="header">{HeaderComponent}</div>
 
-      <div className="nav" />
+      <div className="nav">{NavComponent}</div>
 
       <div className="layout-content">
-        <Loader isActive={true} />
+        <Loader isActive={showLoader} />
 
-        <div className="layout-content-inner" />
+        <div className="layout-content-inner">{ContentComponent}</div>
       </div>
+
+      {FooterComponent}
     </div>
   );
 }

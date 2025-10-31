@@ -1,5 +1,5 @@
 import { Form, FormDataType, FormField } from "../form";
-import { fireEvent, getByText, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 describe('test a form with input-text and textarea', function () {
   const getFields = () => {
@@ -19,15 +19,20 @@ describe('test a form with input-text and textarea', function () {
      *
      * функция getFields поможет заполнить пропс "fields" у формы
      */
+    render(<Form fields={getFields()} FooterComponent={jest.fn()} />);
 
-    expect(true).toEqual(false);
+    const input = screen.getByTestId('0');
+    const textarea = screen.getByTestId('1');
+
+    expect(input).toBeInTheDocument();
+    expect(textarea).toBeInTheDocument();
   });
 
   it('should be a form with two labels', function () {
-    const { getByText } = render(<Form fields={getFields()} FooterComponent={jest.fn()} />);
+    render(<Form fields={getFields()} FooterComponent={jest.fn()} />);
 
-    const inputLabel = getByText("ФИО");
-    const textareaLabel = getByText(/Расскажите/i);
+    const inputLabel = screen.getByText("ФИО");
+    const textareaLabel = screen.getByText(/Расскажите/i);
 
     expect(inputLabel).toBeVisible();
     expect(textareaLabel).toBeVisible();
@@ -43,9 +48,11 @@ describe('test a form with input-text and textarea', function () {
      *
      * функция getFields поможет заполнить пропс "fields" у формы
      */
-
-    const testButton = <button disabled>Click me</button>;
-    expect(true).toEqual(false);
+    const Footer = () => <button disabled>Click me</button>;
+    render(<Form fields={getFields()} FooterComponent={Footer} />);
+    const btn = screen.getByText('Click me');
+    expect(btn).toBeInTheDocument();
+    expect(btn).toBeDisabled();
   });
 
   it('should be correct form data received from the FooterComponent prop', function () {
@@ -56,15 +63,15 @@ describe('test a form with input-text and textarea', function () {
       </button>
     );
 
-    const { getByTestId } = render(<Form fields={getFields()} FooterComponent={FooterComponentSpy} />);
+    render(<Form fields={getFields()} FooterComponent={FooterComponentSpy} />);
 
-    const input = getByTestId("0");
-    const textarea = getByTestId("1");
+    const input = screen.getByTestId("0");
+    const textarea = screen.getByTestId("1");
 
     fireEvent.change(input, { target: { value: "Иван Иванов" } });
     fireEvent.change(textarea, { target: { value: "Родился, вырос и доволен собой" } });
 
-    const button = getByTestId("send-button");
+    const button = screen.getByTestId("send-button");
     fireEvent.click(button);
 
     const expectedFormData: FormDataType = {

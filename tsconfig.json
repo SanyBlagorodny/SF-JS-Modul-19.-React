@@ -17,10 +17,11 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noUnusedLocals": false,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "types": ["jest", "node"]
   },
   "include": [
     "src"

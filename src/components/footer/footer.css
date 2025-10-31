@@ -1,0 +1,87 @@
+.app-footer { 
+  margin-top: 24px;
+  padding: 24px 0 32px;
+  color: #2b2b2b;
+  background: transparent;
+}
+
+.app-footer__line {
+  height: 2px;
+  background: linear-gradient(90deg, rgba(232,224,207,0.7), rgba(232,224,207,0));
+}
+
+.app-footer__inner {
+  max-width: 960px;
+  margin: 12px auto 0;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.app-footer__badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #2b2b2b;
+  color: #FAF3E0;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+}
+
+.app-footer__badge-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.app-footer__text { display: flex; align-items: center; gap: 12px; }
+.app-footer__text .muted { opacity: .7; }
+
+@media (max-width: 480px) {
+  .app-footer__text { flex-direction: column; gap: 4px; }
+}
+
+/* New footer styles as requested */
+.footer {
+  width: 100%;
+  background-color: transparent; /* под бумажный фон */
+  border-top: 1px solid #E8E0CF; /* тонкая ретро-линия */
+  padding: 2rem 0;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.footer__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer__copyright {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer__logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #E8E0CF;
+}
+
+.footer__text {
+  font: inherit; /* наследуем шрифт и кегль как у основного контента */
+  color: inherit;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4rem;
+}

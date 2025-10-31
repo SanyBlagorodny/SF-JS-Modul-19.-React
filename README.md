@@ -1,46 +1,53 @@
-# Getting Started with Create React App
+# Опросник (React + Context + Router)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Одностраничное приложение-опросник. Общие шапка и навигация, контент — по маршрутам. Данные форм хранятся в React Context.
 
-## Available Scripts
+## Технологии
 
-In the project directory, you can run:
+- React 18, TypeScript
+- React Router v6
+- React Context
+- CRA (react-scripts)
+- @testing-library для тестов
 
-### `npm start`
+## Запуск
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Установить зависимости: `npm i`
+- Dev-сервер: `npm start` (http://localhost:3000)
+- Тесты: `npm test`
+- Сборка: `npm run build`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Структура
 
-### `npm test`
+- `src/components/app/App.tsx` — инициализация роутера, загрузка данных, Layout
+- `src/components/layout/` — разметка страницы и лоадер
+- `src/components/header/` — заголовок
+- `src/components/navigation/` — кнопки «Назад/Вперед»
+- `src/components/content/` — экраны: главная, шаги, финал
+- `src/components/form/` — общая форма, поля, тесты
+- `src/context/form-data-context/` — контекст, типы и провайдер
+- `src/api/` + `src/data.ts` — мок-данные шагов
+- `src/const.ts` — список шагов и финальный маршрут
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Пользовательский сценарий
 
-### `npm run build`
+1. Главная (/) — ввод имени/email/занятий. Кнопка «Начать» активна, если заполнено хотя бы одно поле.
+2. Шаги `/first`, `/second`, `/third` — на каждом «Сохранить», данные шага попадают в Context.
+3. Финал `/finish` — «Отправить» выводит в консоль массив из 4 элементов `[name, data]`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Тесты формы
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Файл: `src/components/form/__tests__/form.test.tsx`
+- Тест 1 — рендер input и textarea (по data-testid)
+- Тест 2 — рендер подписей
+- Тест 3 — рендер кнопки из FooterComponent и её состояние `disabled`
+- Тест 4 — корректность данных, переданных из формы в FooterComponent
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Типы/настройки
 
-### `npm run eject`
+- TypeScript настроен через `tsconfig.json` (`isolatedModules`, типы jest/node)
+- ESLint — конфиг CRA
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Замечания по стилю
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+В проекте есть базовая адаптивность. Визуальная тема — светлая, с ретро‑бумажной карточкой и тёплым акцентом у кнопок.

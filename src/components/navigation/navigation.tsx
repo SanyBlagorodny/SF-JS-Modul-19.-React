@@ -1,6 +1,9 @@
 import { useMemo } from "react";
 import { FINISH_SCREEN_PATH, STEPS } from "../../const";
 import "./navigation.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { FormDataContext } from "../../context/form-data-context/form-data-context";
 
 //TODO
 /**
@@ -10,10 +13,11 @@ import "./navigation.css";
  */
 export const Navigation = () => {
   //TODO: воспользуйтесь хуками React Router для получения актуального "pathname"
-  const pathname: any = "IT MUST BE REPLACED";
+  const { pathname } = useLocation();
 
   //TODO: воспользуйтесь хуками React Router для получения работспособой функции "navigate"
-  const navigate: any = () => "I DO NOTHING USEFUL";
+  const navigate = useNavigate();
+  const { isIntroFormFilled } = useContext(FormDataContext);
 
   const isMainPath = useMemo(() => pathname === "/", [pathname]);
 
@@ -62,10 +66,8 @@ export const Navigation = () => {
 
   const getNextButtonDisabled = () => {
     /*раскомментировать этот код поможет использование контекста FormDataContext и хуков React Router*/
-    // if (isMainPath && isIntroFormFilled()) return false;
-    // return isMainPath || pathname === FINISH_SCREEN_PATH
-
-    return false;
+    if (isMainPath && isIntroFormFilled()) return false;
+    return isMainPath || pathname === FINISH_SCREEN_PATH
   }
 
   return (
