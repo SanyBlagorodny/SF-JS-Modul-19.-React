@@ -47,7 +47,7 @@ export const Form = ({ fields, FooterComponent, initialValues }: FormProps) => {
           placeholder,
           maxLength,
           id: htmlFor,
-          value: formData[index],
+          value: formData[index] ?? "",
           "data-testid": htmlFor,
           onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setData(prev => ({
             ...prev,

@@ -1,7 +1,7 @@
 .navigation {
     height: 70px;
     margin: 20px auto;
-    border-bottom: 1px solid #92c561;
+    border-bottom: 1px solid #E8E0CF; /* unified with footer/content */
     max-width: 80%;
     display: flex;
     align-items: center;
