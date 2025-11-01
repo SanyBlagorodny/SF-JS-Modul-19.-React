@@ -2,7 +2,7 @@
   "name": "frpro-30-task",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://sanyblagorodny.github.io/SF-JS-Modul-19.-React/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
