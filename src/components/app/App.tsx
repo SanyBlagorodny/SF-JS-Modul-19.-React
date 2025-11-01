@@ -7,7 +7,7 @@ import { Header } from "../header/header";
 import { loadQuestions } from "../../api/questions-api";
 import { StepDataType } from "../../types";
 import './App.css';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import { Footer } from "../footer/footer";
 
 //TODO
@@ -33,6 +33,24 @@ function App() {
   }, []);
 
   return (
+    process.env.NODE_ENV === 'production' ? (
+      <HashRouter>
+        <FormDataContextWrapper>
+          <div className="App">
+            <Layout
+              // TODO
+              // значение showLoader должно напрямую зависеть от наличия данных в стейте stepsData
+              // как только данные в стейт stepsData появляются, лоадер должен исчезать
+              showLoader={!stepsData}
+              HeaderComponent={<Header />}
+              NavComponent={<Navigation />}
+              ContentComponent={<Content stepsData={stepsData} />}
+              FooterComponent={<Footer />}
+            />
+          </div>
+        </FormDataContextWrapper>
+      </HashRouter>
+    ) : (
     <BrowserRouter>
       <FormDataContextWrapper>
         <div className="App">
@@ -49,6 +67,7 @@ function App() {
         </div>
       </FormDataContextWrapper>
     </BrowserRouter>
+    )
   );
 }
 

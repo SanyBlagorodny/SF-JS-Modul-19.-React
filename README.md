@@ -51,3 +51,11 @@
 ## Замечания по стилю
 
 В проекте есть базовая адаптивность. Визуальная тема — светлая, с ретро‑бумажной карточкой и тёплым акцентом у кнопок.
+
+## Live
+
+- Открыть сайт: https://sanyblagorodny.github.io/SF-JS-Modul-19.-React/
+
+## CI/CD
+
+![Deploy](https://github.com/SanyBlagorodny/SF-JS-Modul-19.-React/actions/workflows/deploy.yml/badge.svg)
