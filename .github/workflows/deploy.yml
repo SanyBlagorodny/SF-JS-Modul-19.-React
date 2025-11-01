@@ -38,6 +38,9 @@ jobs:
           CI: true
         run: npm run build
 
+      - name: Disable Jekyll
+        run: echo > build/.nojekyll
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v4
 
